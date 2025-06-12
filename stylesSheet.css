@@ -20,6 +20,59 @@ html, body {
     margin-bottom: auto;
     padding-right: 15px;
 }
+.header-a {
+    color: #272727;
+    font-size: 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    margin: 0px 10px;
+    position: relative;
+    transition: all .5s
+}
+
+.header-a:hover {
+    background-color: #fdc4b6;
+    color:white;
+  }
+  
+.header-a:before {
+    content: "";
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    width: 12px;
+    height: 12px;
+    border: 3px solid #fdc4b6;
+    border-width: 0 0 3px 3px;
+    opacity: 0;
+    transition: all 0.3s
+  }
+  
+.header-a:hover:before {
+    opacity: 1;
+    bottom: -8px;
+    left: -8px;
+  }
+  
+.header-a:after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 12px;
+    height: 12px;
+    border: 3px solid #fdc4b6;
+    border-width: 3px 3px 0 0;
+    opacity: 0;
+    transition: all 0.3s;
+  }
+  
+  a:hover:after {
+    opacity: 1;
+    top: -8px;
+    right: -8px;
+  }
 .parallax {
     /* The image used */
     background-image: url("./img/banner.jpg");
