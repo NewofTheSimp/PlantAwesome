@@ -113,10 +113,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="grid-container">
                         <?php foreach ($data as $row) { ?>
                             <div class="grid-child">
-                                
-                                <a href="product.php?id=<?php echo $row['Id']; ?>"><p><img class="item-image" src="./<?php echo $row['itemImg']; ?>"
-                                        alt="<?php $row['itemImg']; ?>" width="200"
-                                        height="250"> <br></p></a>
+                                <div class="container">
+                                    <a href="product.php?id=<?php echo $row['Id']; ?>"><img class="animation-image" src="./<?php echo $row['itemImg']; ?>"
+                                            alt="<?php $row['itemImg']; ?>" width="200"
+                                            height="250"></a>
+                                            <div class="caption">
+                                                <h1>Quality products</h1>
+                                            </div>
+                                </div>
+
                                 <p> <?php echo $row['itemDescription']; ?> <br></p>
                                 <p> <?php echo $row['itemName']; ?> <br></p>
                                 <p>€ <?php echo $row['itemPrice']; ?> <br></p>
