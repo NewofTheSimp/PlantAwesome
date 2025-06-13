@@ -545,10 +545,6 @@ a {
     text-align: center;
 }
 
-.order-item {
-    display:block;
-}
-
 .block-header  {
     padding: 4px 20px;
 }
@@ -557,8 +553,13 @@ a {
     padding: 10px 0;
 }
 
-.block-content {
-    padding: 20px;
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkout-img {
+    padding: 20px
 }
 
 .order-item-chekcout {
@@ -572,9 +573,6 @@ a {
     padding: 5px;
 }
 
-.order-item-desc {
-    padding: 0 16px;
-}
 .error-background {
     background-color:#222;
     width:100%;

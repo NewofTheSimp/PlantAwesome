@@ -45,30 +45,24 @@ if ($_SESSION['cart'] && $_SESSION['UserId']) {
                 foreach ($data as $row) { ?>
                      
                     <div class="order-item">
-                        <div class="block-content"> 
-                            <div class="order-item-list">
-                                <div class="order-item-chekcout">
-                                    <div class="cart-image-wrapper">
-                                    <img class="item-image" src="./<?php echo $row['itemImg']; ?>" alt="<?php echo $row['itemImg']; ?>"
-                                    width="75"
-                                    height="75"> <br></p>
-                                    </div>
-                                    <div class="order-item-desc">
-                                        <p>
-                                            <?php echo $row['itemName']; ?> <br>
-                                        </p>
-                                    </div>
-                                    <div class="div-block">
-                                        <div class="text-block"> 
-                                        <p>€<?php echo $row['itemPrice']; 
-                                        $itemTotal += $row['itemPrice'];
-                                        ?> <br></p>
-                                    </div>
-                                </div>
+                        <div class="order-item-chekcout">
+                            <div>
+                                <img class="item-image" src="./<?php echo $row['itemImg']; ?>" alt="<?php echo $row['itemImg']; ?>"
+                                width="75"
+                                height="75">
+                            </div>
+                           
+                            <div>
+                                <?php echo $row['itemName']; ?> <br>
+                            </div>
+                                        
+                            <div>
+                                €<?php echo $row['itemPrice']; 
+                                $itemTotal += $row['itemPrice'];
+                                ?> 
                             </div>
                         </div>
                     </div>
-      
                 <?php } ?>
                 </div>
             <?php } ?>
