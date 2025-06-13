@@ -223,7 +223,7 @@ html, body {
 
 
 #logo-text {
-    color:white;
+    color:#272727;
     margin:auto;
 }
 
@@ -536,6 +536,7 @@ a {
 }
 
 .cart-nav {
+    padding: 10px;
     margin: auto;
     display: inline-block;
 }
