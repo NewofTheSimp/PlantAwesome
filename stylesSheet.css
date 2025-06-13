@@ -149,6 +149,7 @@ html, body {
     border-radius: 25px;
     width: 50%;
     margin: 20px auto;
+    padding: 20px;
 }
 
 .address {
@@ -307,19 +308,47 @@ html, body {
     background-color: transparent;
 }
 
+
 .button {
-    background-color: white;
-    padding: 5px 5px 5px 5px;
-    border-radius: 5px;
-    outline-style: solid;
-    outline-width: thin;
-    outline-color: black;
-    border-style: none;
+  border: none;
+  padding: 12px 40px;
+  background-color: #eb5757;
+  color: white;
+  font-family: 'BenchNine';
+  font-size: 22px;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
 }
-.button:hover{
-    background-color: #C1E1C1;
-    color: white;
-    
+
+.button:before {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: -5px;
+  left: -5px;
+  border-top: 2px solid #eb5757;
+  border-left: 2px solid #eb5757;
+  transition: all 0.25s;
+}
+
+.button:hover:before,
+.button:hover:after {
+  height: 100%;
+  width: 100%;
+}
+
+.button:after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  bottom: -5px;
+  right: -5px;
+  border-bottom: 2px solid #eb5757;
+  border-right: 2px solid #eb5757;
+  transition: all 0.25s;
 }
 
 .shop-top-wrapper {
@@ -362,6 +391,15 @@ html, body {
     border-style: none;
 }
 
+.item-image {
+	transition: transform 1s;
+}
+
+.item-image:hover {
+	transform: scale(1.2) rotate(9deg);
+}
+
+
 .container {
 	position: relative;
 	overflow: hidden;
@@ -384,7 +422,7 @@ html, body {
 	align-items: center;
 	color: white;
 	transition: all 0.5s;
-	background-color: black;
+	background-color: #eb5757;
 	transform: translateY(100%);
 }
 
