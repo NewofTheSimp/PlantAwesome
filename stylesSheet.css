@@ -391,14 +391,6 @@ html, body {
     border-style: none;
 }
 
-.item-image {
-	transition: transform 1s;
-}
-
-.item-image:hover {
-	transform: scale(1.2) rotate(9deg);
-}
-
 
 .container {
 	position: relative;

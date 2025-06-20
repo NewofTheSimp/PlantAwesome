@@ -17,12 +17,12 @@ if ($_SESSION['UserId']) { ?>
             <div class="order-container">
                 <?php
                 global $pdo;
-                $stmt = $pdo->prepare("SELECT orderUserId, orderItemId FROM orders WHERE orderUserId =?");
+                $stmt = $pdo->prepare("SELECT orderUserId, orderItemId FROM orders WHERE orderUserId =? ORDER BY orderId DESC;");
                 $stmt->execute([$_SESSION['UserId']]);
                 $data = $stmt->fetchAll(); ?>
                 <?php foreach ($data as $order) { ?>
                     <?php
-                    $stmt = $pdo->prepare("SELECT itemName, itemPrice, itemImg FROM item WHERE Id =?");
+                    $stmt = $pdo->prepare("SELECT itemName, itemPrice, itemImg FROM item WHERE Id =? ");
                     $stmt->execute([$order['orderItemId']]);
                     $data = $stmt->fetchAll(); ?>
 
