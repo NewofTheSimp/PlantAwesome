@@ -17,14 +17,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         global $pdo;
         $stmt = $pdo->prepare("SELECT userEmail FROM user WHERE userEmail =?");
-        $stmt->execute([$UserEmail]); 
+        $stmt->execute([htmlspecialchars($UserEmail)]); 
         $data = $stmt->fetch();
         
         if(!$data) {
             $stmt = $pdo->prepare("INSERT INTO user (isAdmin, userEmail, userName, userPassword) VALUES (?,?,?,?)");
-            $stmt->execute([0, $UserEmail, $UserName, $hashed_password]);   
+            $stmt->execute([0, htmlspecialchars($UserEmail), htmlspecialchars($UserName), htmlspecialchars($hashed_password)]);   
             $stmt = $pdo->prepare("SELECT Id,isAdmin FROM user WHERE userName = ?");
-            $stmt->execute([$UserName]);
+            $stmt->execute([htmlspecialchars($UserName)]);
             $data = $stmt->fetchAll();
             $_SESSION['UserId'] = $data[0]['Id'];
             $_SESSION['UserName'] = $UserName;

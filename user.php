@@ -16,7 +16,7 @@ if (isset($_SESSION['UserId'])) {
                 $UserId = $_SESSION['UserId'];
     
                 $stmt = $pdo->prepare("UPDATE user SET userEmail=?, userName=?, userPassword=? WHERE Id=?");
-                $stmt->execute([$UserEmail, $UserName, $hashed_password, $UserId]); 
+                $stmt->execute([htmlspecialchars($UserEmail), htmlspecialchars($UserName), htmlspecialchars($hashed_password), htmlspecialchars($UserId)]); 
                 if($stmt)
                 {
                     $_SESSION['UserName'] = $UserName;
@@ -37,7 +37,7 @@ if (isset($_SESSION['UserId'])) {
                 $UserId = $_SESSION['UserId'];
     
                 $stmt = $pdo->prepare("UPDATE useraddress SET streetName=?, streetNumber=?, streetPostalCode=?, country=?  WHERE userId=?");
-                $stmt->execute([$StreetName, $StreetNumber, $StreetPostalCode, $Country , $UserId]); 
+                $stmt->execute([htmlspecialchars($StreetName), htmlspecialchars($StreetNumber), htmlspecialchars($StreetPostalCode), htmlspecialchars($Country), htmlspecialchars($UserId)]); 
                 if($stmt)
                 {
                     header("Location: success.php");

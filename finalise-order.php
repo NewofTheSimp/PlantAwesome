@@ -12,7 +12,7 @@ if ($_SESSION['cart'] && $_SESSION['UserId']) {
         if (!empty($_POST['ccnum']) && !empty($_POST['ccexp']) && !empty($_POST['cccarname']) && !empty($_POST['cccvv'])) {
         foreach (($_SESSION['cart']) as $cart) {
             $stmt = $pdo->prepare("INSERT INTO orders (orderUserId, orderItemId) VALUES (?, ?)");
-            $stmt->execute([$_SESSION['UserId'], $cart]);
+            $stmt->execute([htmlspecialchars($_SESSION['UserId']),  htmlspecialchars($cart)]);
         }
         unset($_SESSION['cart']);
         header("Location: order.php");
@@ -34,11 +34,11 @@ if ($_SESSION['cart'] && $_SESSION['UserId']) {
             <p> <?php echo $data[0]['userEmail']; ?> <br></p>
             <p> <?php echo $data[0]['userName']; ?> <br></p>
             <?php $itemTotal = 0; ?>
-                <div class="order-container">
+            <div class="order-container">
                 <?php foreach (($_SESSION['cart']) as $cart) { ?>
                 <?php
                 $stmt = $pdo->prepare("SELECT * FROM item WHERE Id=?");
-                $stmt->execute([$cart]);
+                $stmt->execute([htmlspecialchars($cart)]);
                 $data = $stmt->fetchAll();
                     
 
@@ -64,10 +64,10 @@ if ($_SESSION['cart'] && $_SESSION['UserId']) {
                         </div>
                     </div>
                 <?php } ?>
-                </div>
+            </div>
             <?php } ?>
                 <p>
-                    Order total: €
+                    Order total: € 
                     <?php echo $itemTotal ?>
                 </p>
             <div class="checkout-container">

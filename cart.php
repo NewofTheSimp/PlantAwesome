@@ -6,7 +6,7 @@ if ($_SESSION['cart']) {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // collect value of input field
         if (!isset($_SESSION['cart'])) $_SESSION['cart'] = array();
-        $name = $_POST['button'];
+        $name = htmlspecialchars($_POST['button']);
         if (empty($name)) {
             header("Location: address.php");
         } else {
@@ -32,7 +32,7 @@ if ($_SESSION['cart']) {
    global $pdo;
    foreach (($_SESSION['cart']) as $cart) {
        $stmt = $pdo->prepare("SELECT * FROM item WHERE Id=?");
-       $stmt->execute([$cart]);
+       $stmt->execute([htmlspecialchars($cart)]);
        $data = $stmt->fetchAll(); ?>
        <?php foreach ($data as $row) { ?>
         <div class="order-item">

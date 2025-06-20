@@ -23,7 +23,7 @@ if ($_SESSION['UserId']) { ?>
                 <?php foreach ($data as $order) { ?>
                     <?php
                     $stmt = $pdo->prepare("SELECT itemName, itemPrice, itemImg FROM item WHERE Id =? ");
-                    $stmt->execute([$order['orderItemId']]);
+                    $stmt->execute([htmlspecialchars($order['orderItemId'])]);
                     $data = $stmt->fetchAll(); ?>
 
                     <?php foreach ($data as $row) { ?>

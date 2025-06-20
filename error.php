@@ -17,5 +17,5 @@
 </html>
 
 <?php 
-header("refresh:3; url={$_SERVER['HTTP_REFERER']}");
+header("refresh:1; url={$_SERVER['HTTP_REFERER']}");
 ?>

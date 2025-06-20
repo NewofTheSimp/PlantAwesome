@@ -14,10 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $UserEmail = $_POST['UserEmail'];
         $UserPassword = $_POST['UserPassword'];
         $hashed_password = password_hash($UserPassword, PASSWORD_DEFAULT);
-        if (password_verify($UserPassword, $hashed_password)) {
+        if (password_verify(htmlspecialchars($UserPassword), htmlspecialchars($hashed_password))) {
             global $pdo;
             $stmt = $pdo->prepare("SELECT Id,isAdmin,userName FROM user WHERE userEmail = ?");
-            $stmt->execute([$UserEmail]);
+            $stmt->execute([htmlspecialchars($UserEmail)]);
             $data = $stmt->fetchAll();
             $_SESSION['UserId'] = $data[0]['Id'];
             $_SESSION['UserName'] = $data[0]['userName'];

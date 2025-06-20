@@ -24,7 +24,7 @@ if (isset($_SESSION['IsAdmin']) && $_SESSION['IsAdmin'] === 1) {
                 if(!$data) {
                     $hashed_password = password_hash($UserPassword, PASSWORD_DEFAULT);
                     $stmt = $pdo->prepare("INSERT INTO user (isAdmin, userEmail, userName, userPassword) VALUES (?,?,?,?)");
-                    $stmt->execute([1, $UserEmail, $UserName, $hashed_password]);
+                    $stmt->execute([1, htmlspecialchars($UserEmail), htmlspecialchars($UserName), htmlspecialchars($hashed_password)]);
                     header("Location: success.php");
                     }
                 } else {
@@ -107,7 +107,7 @@ if (isset($_SESSION['IsAdmin']) && $_SESSION['IsAdmin'] === 1) {
                         $ItemName = $_POST['itemName'];
                         $ItemPrice = $_POST['itemPrice'];
                         $stmt = $pdo->prepare("INSERT INTO item (itemName, itemDescription, itemPrice, itemImg) VALUES (?,?,?,?)");
-                        $stmt->execute([$ItemName, $ItemDescription, $ItemPrice, $target_file]);
+                        $stmt->execute([htmlspecialchars($ItemName), htmlspecialchars($ItemDescription), htmlspecialchars($ItemPrice), htmlspecialchars($target_file)]);
                     }
                     header("Location: success.php");
                 } else {

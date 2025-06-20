@@ -4,7 +4,7 @@ include 'config.php';
 if ($_SESSION['cart'] && $_SESSION['UserId']) {
     global $pdo;
     $stmt = $pdo->prepare("SELECT userId FROM useraddress WHERE userId = ?");
-    $stmt->execute([$_SESSION['UserId']]);
+    $stmt->execute([htmlspecialchars($_SESSION['UserId'])]);
     $data = $stmt->fetchAll();
 
     if (!isset($data[0]['userId'])) {
@@ -22,7 +22,7 @@ if ($_SESSION['cart'] && $_SESSION['UserId']) {
                 $country = $_POST['country'];
 
                 $stmt = $pdo->prepare("INSERT INTO useraddress (userId, streetName, streetNumber, streetPostalCode, country) VALUES (?,?,?,?,?)");
-                $stmt->execute([$_SESSION['UserId'], $StreetName, $StreetNumber, $PostalCode, $country]);
+                $stmt->execute([htmlspecialchars($_SESSION['UserId']), htmlspecialchars($StreetName), htmlspecialchars($StreetNumber), htmlspecialchars($PostalCode), htmlspecialchars($country)]);
                 header("Location: finalise-order.php");
             }
         }
@@ -82,7 +82,7 @@ if ($_SESSION['cart'] && $_SESSION['UserId']) {
                             global $pdo;
                             foreach (($_SESSION['cart']) as $cart) {
                                 $stmt = $pdo->prepare("SELECT * FROM item WHERE Id=?");
-                                $stmt->execute([$cart]);
+                                $stmt->execute([htmlspecialchars($cart)]);
                                 $data = $stmt->fetchAll(); ?>
                                 <?php foreach ($data as $row) { ?>
                                     <div class="item-container">

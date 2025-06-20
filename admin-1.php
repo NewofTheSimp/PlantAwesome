@@ -1,14 +1,14 @@
 <?php
 session_start();
 include 'config.php';
-if (isset($_SESSION['IsAdmin']) && $_SESSION['IsAdmin'] === 1) {
+if (isset(htmlspecialchars($_SESSION['IsAdmin'])) && htmlspecialchars($_SESSION['IsAdmin'] === 1)) {
 
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = $_POST['button'];
         global $pdo;
         $stmt = $pdo->prepare("DELETE FROM orders WHERE orderId = ?");
-        $stmt->execute([$name]);
+        $stmt->execute([htmlspecialchars($name)]);
         header("Location: success.php");
     } ?>
 
@@ -26,7 +26,7 @@ if (isset($_SESSION['IsAdmin']) && $_SESSION['IsAdmin'] === 1) {
             <?php foreach ($data as $order) { ?>
                 <?php
                 $stmt = $pdo->prepare("SELECT itemName, itemDescription, itemPrice, itemImg FROM item WHERE Id =?");
-                $stmt->execute([$order['orderItemId']]);
+                $stmt->execute([htmlspecialchars($order['orderItemId'])]);
                 $data = $stmt->fetchAll(); ?>
                 <p>
                     <button type="submit" class="button" name="button" value="<?php echo $order['orderId']; ?>">
