@@ -64,12 +64,12 @@ if ($_SESSION['cart'] && $_SESSION['UserId']) {
                         </div>
                     </div>
                 <?php } ?>
-            </div>
             <?php } ?>
-                <p>
-                    Order total: € 
-                    <?php echo $itemTotal ?>
-                </p>
+            <p>
+                Order total: € 
+                <?php echo $itemTotal ?>
+            </p>
+            </div>
             <div class="checkout-container">
                 <p>
                     <label for="fname">Credit card number </label><br>

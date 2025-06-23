@@ -5,7 +5,7 @@ include 'config.php';
 if (isset($_SESSION['IsAdmin']) && $_SESSION['IsAdmin'] === 1) {
     global $pdo;
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $name = intval($_POST['button']);
+        $name = intval(htmlspecialchars($_POST['button']));
         if ($name === -2) {
             header("Location: admin-1.php");
         }
@@ -18,7 +18,7 @@ if (isset($_SESSION['IsAdmin']) && $_SESSION['IsAdmin'] === 1) {
                 $UserPassword = $_POST['UserPassword'];
     
                 $stmt = $pdo->prepare("SELECT userEmail FROM user WHERE userEmail =?");
-                $stmt->execute([$UserEmail]); 
+                $stmt->execute([htmlspecialchars($UserEmail)]); 
                 $data = $stmt->fetch();
                 
                 if(!$data) {

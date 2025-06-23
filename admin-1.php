@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'config.php';
-if (isset(htmlspecialchars($_SESSION['IsAdmin'])) && htmlspecialchars($_SESSION['IsAdmin'] === 1)) {
+if (isset($_SESSION['IsAdmin']) && $_SESSION['IsAdmin'] === 1) {
 
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -54,7 +54,7 @@ if (isset(htmlspecialchars($_SESSION['IsAdmin'])) && htmlspecialchars($_SESSION[
 
                 <?php }
                 $stmt = $pdo->prepare("SELECT streetName, streetNumber, streetPostalCode, country FROM useraddress WHERE userId =?");
-                $stmt->execute([$order['orderUserId']]);
+                $stmt->execute([htmlspecialchars($order['orderUserId'])]);
                 $data = $stmt->fetchAll(); ?>
                 <?php foreach ($data
 
