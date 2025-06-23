@@ -18,7 +18,7 @@ if ($_SESSION['UserId']) { ?>
                 <?php
                 global $pdo;
                 $stmt = $pdo->prepare("SELECT orderUserId, orderItemId FROM orders WHERE orderUserId =? ORDER BY orderId DESC;");
-                $stmt->execute([$_SESSION['UserId']]);
+                $stmt->execute([htmlspecialchars($_SESSION['UserId'])]);
                 $data = $stmt->fetchAll(); ?>
                 <?php foreach ($data as $order) { ?>
                     <?php

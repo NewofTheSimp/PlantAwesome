@@ -62,7 +62,7 @@ if (isset($_SESSION['UserId'])) {
     <div class="center wrapper">
         <?php 
         $stmt = $pdo->prepare("SELECT * FROM user WHERE Id = ?");
-        $stmt->execute([$_SESSION['UserId']]);
+        $stmt->execute([htmlspecialchars($_SESSION['UserId'])]);
         $data = $stmt->fetchAll();
         ?>
         <form action="" method="post" id="nameform" enctype="multipart/form-data">
@@ -94,7 +94,7 @@ if (isset($_SESSION['UserId'])) {
       
                 <?php 
                 $stmt = $pdo->prepare("SELECT * FROM useraddress WHERE userId = ?");
-                $stmt->execute([$_SESSION['UserId']]);
+                $stmt->execute([htmlspecialchars($_SESSION['UserId'])]);
                 $data = $stmt->fetchAll();
                 ?>
                 <div class="grid-container">
