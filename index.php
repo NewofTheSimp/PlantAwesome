@@ -111,7 +111,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="product-list" id="product-list">
                 <form action="" method="post" id="nameform">
                     <div class="grid-container">
-                        <?php foreach ($data as $row) { ?>
+                        <?php foreach ($data as $row) {
+                            if($row['stock'] === 1) { ?>
                             <div class="grid-child">
                                 <div class="container">
                                     <a href="product.php?id=<?php echo $row['Id']; ?>"><img class="animation-image" src="./<?php echo $row['itemImg']; ?>"
@@ -132,7 +133,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     </button>
                                     <br></p>
                             </div>
-                        <?php } ?>
+                        <?php }
+                    } ?>
                     </div>
                 </form>
             </div>

@@ -32,32 +32,26 @@ if (isset($_SESSION['IsAdmin']) && $_SESSION['IsAdmin'] === 1) {
                 }
             }
 
-        $IsOrderd = False;
         if ($name > 0) { 
-            $stmt = $pdo->prepare("SELECT orderItemId FROM orders");
-            $stmt->execute();
-            $data = $stmt->fetchAll();
-
-            foreach ($data as $item){
-                if($name === $item['orderItemId'])
-                {
-                    $IsOrderd = True;
-                    header("Location: error.php");
+                $stmt = $pdo->prepare("SELECT stock FROM item Where Id = ?");
+                $stmt->execute([htmlspecialchars($name)]);
+                $data = $stmt->fetch();
+                if($data['stock'] === 1 ) {
+                    $stmt = $pdo->prepare("UPDATE item SET Stock = 0 WHERE Id = ?");
+                    $stmt->execute([htmlspecialchars($name)]);
+    
+                } else {
+                    $stmt = $pdo->prepare("UPDATE item SET Stock = 1 WHERE Id = ?");
+                    $stmt->execute([htmlspecialchars($name)]);
                 }
-            }
-            if (!$IsOrderd) {
-                $stmt = $pdo->prepare("SELECT itemImg FROM item WHERE Id = ?");
-                $stmt->execute([$name]);
-                $data = $stmt->fetchAll();
-                
-                $stmt = $pdo->prepare("DELETE FROM item WHERE Id = ?");
-                $stmt->execute([$name]);
-                if($stmt) {
-                    unlink($data[0]['itemImg']);
+                if($stmt)  {
+                    header("Location: success.php");
+                } else {
+                    header("Location: error.php");  
                 }
-                header("Location: success.php");
+       
             }
-        }
+        
         
         if ($name === 0) {
             $target_dir = "img/";
@@ -184,11 +178,16 @@ if (isset($_SESSION['IsAdmin']) && $_SESSION['IsAdmin'] === 1) {
                         <p>€ <?php echo $row['itemPrice']; ?> <br></p>
                         <p> <?php echo $row['itemDescription']; ?> <br></p>
                         <p>
-                            <button type="submit" class="button" name="button" value="<?php echo $row['Id']; ?>"> Delete
-                                item
+                        <?php if($row['stock'] === 1) { ?>
+                            <button type="submit" class="button" name="button" value="<?php echo $row['Id']; ?>"> Set out Stock
                             </button>
                             <br></p>
-                    </div>
+                        <?php } else { ?>
+                            <button type="submit" class="button" name="button" value="<?php echo $row['Id']; ?>"> Set back in stock
+                            </button>
+                            <br></p>
+                        <?php }?>
+                </div>
                 <?php } ?>
             </div>
             <p>
