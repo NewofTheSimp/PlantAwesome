@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
     $product_id = intval($_GET['id']); 
     // collect value of input field
     $stmt = $pdo->prepare("SELECT * FROM item WHERE Id=?");
-    $stmt->execute([$product_id]); // casting to int if 'Id' is an integer
+    $stmt->execute(htmlspecialchars([$product_id])); // casting to int if 'Id' is an integer
     $data = $stmt->fetch(PDO::FETCH_ASSOC); 
 
     if($data) { 
