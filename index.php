@@ -115,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             if($row['stock'] === 1) { ?>
                             <div class="grid-child">
                                 <div class="container">
-                                    <a href="product.php?id=<?php echo $row['Id']; ?>"><img class="animation-image" src="./<?php echo $row['itemImg']; ?>"
+                                    <a href="product.php?id=<?php echo urlencode($row['Id']); ?>"><img class="animation-image" src="./<?php echo $row['itemImg']; ?>"
                                             alt="<?php $row['itemImg']; ?>" width="200"
                                             height="250"></a>
                                             <div class="caption">
